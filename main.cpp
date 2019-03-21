@@ -1,11 +1,10 @@
 #include <SFML/Graphics.hpp>
+#include "GameManager.h"
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
-
+	auto gameManager = GameManager{};
+	sf::RenderWindow window(sf::VideoMode(GameManager::WINDOW_WIDTH, GameManager::WINDOW_HEIGHT), GameManager::WINDOW_TITLE);
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -13,10 +12,14 @@ int main()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
+			if(!gameManager.isStarted)
+				gameManager.Start();
 		}
 
+		gameManager.Update();
+
 		window.clear();
-		window.draw(shape);
+		gameManager.Draw(window);
 		window.display();
 	}
 
