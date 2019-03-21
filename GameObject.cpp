@@ -19,6 +19,7 @@ void GameObject::Update(float time)
 
 void GameObject::Draw(sf::RenderWindow& window)
 {
+	sprite.setPosition(position.x, position.y);
 	window.draw(sprite);
 }
 

@@ -1,5 +1,5 @@
 #include "GameManager.h"
-
+#include "InputManager.h"
 const char *GameManager::WINDOW_TITLE{ "Game Engine" };
 
 void GameManager::Start()
@@ -12,6 +12,7 @@ void GameManager::Start()
 void GameManager::Update()
 {
 	auto time = chrono.restart().asSeconds();
+	InputManager::UpdateInput();
 	for (auto i{ 0u }; i < gameObjects.size(); i++) {
 		gameObjects[i]->Update(time);
 	}
