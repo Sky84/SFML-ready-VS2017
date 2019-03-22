@@ -1,5 +1,6 @@
 #pragma once
 #include "Player.h"
+#include "Wall.h"
 
 class GameManager {
 public:

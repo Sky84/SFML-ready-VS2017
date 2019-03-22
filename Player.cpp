@@ -8,6 +8,8 @@ Player::Player()
 void Player::Start()
 {
 	InitAnimations();
+	speed = 30;
+	position = sf::Vector2f(200, 200);
 }
 
 void Player::InitAnimations()
@@ -22,9 +24,9 @@ void Player::InitAnimations()
 	SetCurrentAnimation("idle");
 }
 
-void Player::Update(float time)
+void Player::Update(float const& time)
 {
-	auto direction = sf::Vector2f(0, 0);
+	direction = sf::Vector2f(0, 0);
 	if (InputManager::Up) {
 		direction.y = -1;
 		SetCurrentAnimation("up");
@@ -45,6 +47,5 @@ void Player::Update(float time)
 	if (direction == sf::Vector2f(0, 0))
 		SetCurrentAnimation("idle");
 
-	position += direction * (speed * time);
-
+	GameObject::Update(time);
 }
