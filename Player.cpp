@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "InputManager.h"
+#include "Resources.h"
 Player::Player()
 {
 	SetTexture(Resources<sf::Texture>::getRessources("resources/player.png"));
@@ -9,7 +10,8 @@ void Player::Start()
 {
 	InitAnimations();
 	speed = 30;
-	position = sf::Vector2f(200, 200);
+	position = sf::Vector2f(300, 100);
+	useGravity = true;
 }
 
 void Player::InitAnimations()
@@ -20,31 +22,29 @@ void Player::InitAnimations()
 	SetAnimation("down", switchTime, 2, 9, 64, 64);
 	SetAnimation("right", switchTime, 3, 9, 64, 64);
 	SetAnimation("idle", switchTime, 2, 1, 64, 64);
-
-	SetCurrentAnimation("idle");
 }
 
 void Player::Update(float const& time)
 {
-	direction = sf::Vector2f(0, 0);
+	velocity = sf::Vector2f(0, 0);
 	if (InputManager::Up) {
-		direction.y = -1;
+		velocity.y = -1;
 		SetCurrentAnimation("up");
 	}
 	else if (InputManager::Down) {
-		direction.y = 1;
+		velocity.y = 1;
 		SetCurrentAnimation("down");
 	}
 	if (InputManager::Left) {
-		direction.x = -1;
+		velocity.x = -1;
 		SetCurrentAnimation("left");
 	}
 	else if (InputManager::Right) {
-		direction.x = 1;
+		velocity.x = 1;
 		SetCurrentAnimation("right");
 	}
 
-	if (direction == sf::Vector2f(0, 0))
+	if (velocity == sf::Vector2f(0, 0))
 		SetCurrentAnimation("idle");
 
 	GameObject::Update(time);

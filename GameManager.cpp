@@ -19,10 +19,11 @@ void GameManager::Update()
 		gameObjects[i]->AnimationUpdate(time);
 		for (auto j{ 0u }; j < gameObjects.size(); j++)
 		{
-			if (i != j && !gameObjects[i]->checkCollision(*gameObjects[j])) {
-				gameObjects[i]->PositionUpdate(time);
+			if (i != j && gameObjects[i]->CheckCollision(*gameObjects[j])) {
+				gameObjects[i]->TriggerCollision(*gameObjects[j]);
 			}
 		}
+		gameObjects[i]->GravityUpdate(time, gravityFactor);
 	}
 }
 

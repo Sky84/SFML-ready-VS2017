@@ -1,4 +1,5 @@
 #include "Wall.h"
+#include "Resources.h"
 
 Wall::Wall()
 {

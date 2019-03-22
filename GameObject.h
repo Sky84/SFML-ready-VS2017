@@ -1,34 +1,44 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Resources.h"
 #include "Animation.h"
 #include <map>
 
 class GameObject {
 public:
 	explicit GameObject();
-	explicit GameObject(std::string_view const& spritePath);
 	virtual void Start();
 	virtual void Update(float const& time);
 	virtual void Draw(sf::RenderWindow& window) const;
 	virtual sf::FloatRect GetHitbox() const;
 	void AnimationUpdate(float time);
-	void PositionUpdate(float const& time);
+	void TriggerCollision(GameObject const& other);
+	void GravityUpdate(float const& time, float const& gravityFactor);
 	void UpdateSprite();
-	bool checkCollision(GameObject const& other);
+	bool CheckCollision(GameObject const& other);
 
-	bool isColliding{ true };
+	bool GetIsColliding();
+	bool GetIsTrigger();
+
 	sf::Sprite sprite;
 	sf::Vector2f position{ 0,0 };
-	sf::Vector2f direction{ 0,0 };
+	sf::Vector2f velocity{ 0,0 };
 protected:
 	virtual void SetCurrentAnimation(std::string_view const& animationName);
 	virtual void SetAnimation(std::string_view const& animationName, float switchTime, int rowIndex, int nbrOfFrame, int spriteWidth, int spriteHeight);
 	virtual void SetTexture(sf::Texture const& p_texture);
+	virtual void OnCollision(GameObject const& other);
+	virtual void OnTrigger(GameObject const& other);
+	void setIsTrigger(bool const& value);
+	void setIsColliding(bool const& value);
+
 	std::map<std::string_view, Animation> animations;
 	std::string currentAnimation;
 	int currentAnimationIndex;
 
+	bool useGravity{ false };
+	bool isOnGround{ false };
 	float speed;
 private:
+	bool isColliding{ true };
+	bool isTrigger{ false };
 };

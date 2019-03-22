@@ -9,6 +9,7 @@ public:
 	void Draw(sf::RenderWindow& window);
 	void AddGameobject(std::unique_ptr<GameObject> gameObject);
 	bool isStarted{ false };
+	float gravityFactor{ 10 };
 
 	static const char *WINDOW_TITLE;
 	static const int WINDOW_WIDTH{ 800 };
