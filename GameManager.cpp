@@ -15,6 +15,7 @@ void GameManager::Update()
 	InputManager::UpdateInput();
 	for (auto i{ 0u }; i < gameObjects.size(); i++) {
 		gameObjects[i]->Update(time);
+		gameObjects[i]->AnimationUpdate(time);
 	}
 }
 

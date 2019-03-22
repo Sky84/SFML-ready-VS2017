@@ -6,8 +6,9 @@ public:
 	Player();
 	virtual void Start() override;
 	virtual void Update(float time) override;
+	void InitAnimations();
 
 private:
-	int speed{ 30 };
+	int speed{ 50 };
 };
 
