@@ -1,6 +1,7 @@
 #pragma once
 #include "Player.h"
 #include "Wall.h"
+#include "ScreenManager.h"
 
 class GameManager {
 public:
@@ -10,6 +11,8 @@ public:
 	void AddGameobject(std::unique_ptr<GameObject> gameObject);
 	bool isStarted{ false };
 	float gravityFactor{ 10 };
+
+	ScreenManager screenManager;
 
 	static const char *WINDOW_TITLE;
 	static const int WINDOW_WIDTH{ 800 };

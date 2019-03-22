@@ -4,6 +4,9 @@ const char *GameManager::WINDOW_TITLE{ "Game Engine" };
 
 void GameManager::Start()
 {
+	screenManager = ScreenManager{};
+	screenManager.Show("MainMenu");
+
 	isStarted = true;
 	AddGameobject(std::make_unique<Player>());
 	AddGameobject(std::make_unique<Wall>());
